@@ -1,0 +1,12 @@
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# Windows 系统文件
+desktop.ini
+Thumbs.db
+
+# 临时实验文件（跑完就删的那种）
+mode_test.txt
+tmp_test.txt
