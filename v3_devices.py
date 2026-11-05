@@ -96,7 +96,7 @@ while True:
                 found = d
 
         if found is None:
-            print(f"没有 id 为{target} 的设备")
+            print(f"没有 id 为 {target} 的设备")
             continue
 
         print(f"确认删除 {found['id']} 号 {found['name']} {found['model']} 吗？")

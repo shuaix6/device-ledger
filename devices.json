@@ -26,5 +26,12 @@
     "model": "QC-50",
     "power": 0.5,
     "location": "4号车间"
+  },
+  {
+    "id": 5,
+    "name": "测试机",
+    "model": "T-1",
+    "power": 7.7,
+    "location": "9号车间"
   }
 ]
