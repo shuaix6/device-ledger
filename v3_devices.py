@@ -79,6 +79,33 @@ while True:
 
         print(f"已添加，id是{new_id}")
 
+    elif choice == "5":
+        target  = int(input("要删哪个 id: "))
+
+        found = None
+        for d in devices:
+            if d["id"] == target:
+                found = d
+
+        if found is None:
+            print(f"没有 id 为{target} 的设备")
+            continue
+
+        print(f"确认删除 {found['id']} 号 {found['name']} {found['model']} 吗？")
+        confirm = input("输入 y 确认，其他取消：")
+
+        if confirm != "y":
+            print("已取消")
+            continue
+
+        devices.remove(found)
+
+        with open("devices.json","w",encoding="utf-8") as fout:
+            json.dump(devices,fout,ensure_ascii=False,indent=2)
+
+        print("已删除")
+        
+
   
     elif choice == "0":
         print("再见，退出")

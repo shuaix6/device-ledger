@@ -26,12 +26,5 @@
     "model": "QC-50",
     "power": 0.5,
     "location": "4号车间"
-  },
-  {
-    "id": 5,
-    "name": "风机",
-    "model": "F-100",
-    "power": 2.5,
-    "location": "5号车间"
   }
 ]
