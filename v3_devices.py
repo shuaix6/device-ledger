@@ -45,8 +45,41 @@ while True:
                 found = True
         if not found:
             print("没有匹配")
-            
-    
+
+    elif choice == "4":
+        name = input("设备名：")
+        model = input("型号：")
+        power = float(input("功率："))
+        location = input("车间：")
+
+        dup = False
+        for d in devices:
+            if d["name"] == name and d["model"] == model:
+                dup = True
+        if dup:
+            print("这台设备已经在了，没有重复添加")
+            continue
+
+        max_id = 0
+        for d in devices:
+            if d["id"] > max_id:
+                max_id = d["id"]
+        new_id = max_id + 1
+
+        devices.append({
+            "id": new_id,
+            "name": name,
+            "model": model,
+            "power": power,
+            "location": location 
+        })
+
+        with open("devices.json","w",encoding="utf-8") as fout:
+            json.dump(devices,fout,ensure_ascii=False,indent=2)
+
+        print(f"已添加，id是{new_id}")
+
+  
     elif choice == "0":
         print("再见，退出")
         break
