@@ -104,7 +104,28 @@ while True:
             json.dump(devices,fout,ensure_ascii=False,indent=2)
 
         print("已删除")
-        
+
+    elif choice == "6":
+        target = int(input("要改哪个 id 的功率："))
+
+        found = None
+        for d in devices:
+            if d["id"] == target:
+                found = d 
+
+        if found is None:
+            print(f"没有 id 为 {target} 的设备")
+            continue
+
+        print(f"当前：{found['name']},功率 {found['power']}")
+
+        new_power = float(input("新功率是多少："))
+        found["power"] = new_power
+
+        with open("devices.json", "w", encoding="utf-8") as fout:
+            json.dump(devices, fout, ensure_ascii=False, indent=2)
+
+        print("已修改")
 
   
     elif choice == "0":
