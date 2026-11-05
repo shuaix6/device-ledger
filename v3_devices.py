@@ -49,7 +49,11 @@ while True:
     elif choice == "4":
         name = input("设备名：")
         model = input("型号：")
-        power = float(input("功率："))
+        try:
+            power = float(input("功率："))
+        except ValueError:
+            print("功率必须是数字，这次新增取消")
+            continue
         location = input("车间：")
 
         dup = False
@@ -80,7 +84,11 @@ while True:
         print(f"已添加，id是{new_id}")
 
     elif choice == "5":
-        target  = int(input("要删哪个 id: "))
+        try:
+            target  = int(input("要删哪个 id: "))
+        except ValueError:
+            print("id 必须是整数")
+            continue
 
         found = None
         for d in devices:
@@ -106,7 +114,11 @@ while True:
         print("已删除")
 
     elif choice == "6":
-        target = int(input("要改哪个 id 的功率："))
+        try:
+            target = int(input("要改哪个 id 的功率："))
+        except ValueError:
+            print("id 必须是整数")
+            continue
 
         found = None
         for d in devices:
@@ -118,8 +130,12 @@ while True:
             continue
 
         print(f"当前：{found['name']},功率 {found['power']}")
-
-        new_power = float(input("新功率是多少："))
+        try:
+            new_power = float(input("新功率是多少："))
+        except ValueError:
+            print("功率必须是数字，这次修改取消")
+            continue
+        
         found["power"] = new_power
 
         with open("devices.json", "w", encoding="utf-8") as fout:
