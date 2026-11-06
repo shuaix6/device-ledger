@@ -26,12 +26,5 @@
     "model": "T-1",
     "power": 7.7,
     "location": "9号车间"
-  },
-  {
-    "id": 6,
-    "name": "测试机1",
-    "model": "111",
-    "power": 111111.0,
-    "location": "1号车间"
   }
 ]
