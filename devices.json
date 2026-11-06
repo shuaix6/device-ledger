@@ -10,15 +10,8 @@
     "id": 2,
     "name": "焊接机器人",
     "model": "WR-200",
-    "power": 9.9,
+    "power": 6.6,
     "location": "1号车间"
-  },
-  {
-    "id": 3,
-    "name": "传送带",
-    "model": "CV-100",
-    "power": 3.0,
-    "location": "2号车间"
   },
   {
     "id": 4,
@@ -33,5 +26,12 @@
     "model": "T-1",
     "power": 7.7,
     "location": "9号车间"
+  },
+  {
+    "id": 6,
+    "name": "测试机1",
+    "model": "111",
+    "power": 111111.0,
+    "location": "1号车间"
   }
 ]
