@@ -10,3 +10,7 @@ Thumbs.db
 # 临时实验文件（跑完就删的那种）
 mode_test.txt
 tmp_test.txt
+
+# 学习练习文件（不进仓库，只留本地）
+_practice/
+
