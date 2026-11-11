@@ -26,5 +26,12 @@
     "model": "T-1",
     "power": 7.7,
     "location": "9号车间"
+  },
+  {
+    "id": 7,
+    "name": "8899",
+    "model": "678",
+    "power": 6666.0,
+    "location": "5555"
   }
 ]
