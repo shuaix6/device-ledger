@@ -78,6 +78,10 @@ try:
         messages.append({"role": "user", "content": q})
         messages.append({"role": "assistant", "content": reply})
 
+        with open("run.log", "a", encoding="utf-8") as f:
+            f.write(f"问：{q}\n")
+            f.write(f"答：{reply}\n\n")
+
         print(f"\n模型: {reply}\n")
 except KeyboardInterrupt:
     print()
