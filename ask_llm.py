@@ -19,9 +19,9 @@ def explain_status(code):
     if code == 200:
         return ""
     if code == 401:
-        return "401: key 不对， 或者根本没带上"
+        return "401: key 不对，或者根本没带上"
     if code == 402:
-        return "402: 账户余额不足， 去充值"
+        return "402: 账户余额不足，去充值"
     if code == 429:
         return "429: 请求太频繁，等几十秒再试"
     return f"没预料到的状态码：{code}"
