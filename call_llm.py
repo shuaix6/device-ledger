@@ -11,7 +11,7 @@ headers = {
     "Content-Type":"application/json"
 }
 data = {
-    "model":"deepseek-chat",
+    "model": "deepseek-flash",
     "messages":[
         {"role": "user", "content":"用一句话解释什么是RAG"}
     ]

@@ -7,7 +7,7 @@ load_dotenv()
 key = os.getenv("DEEPSEEK_KEY")
 
 URL = "https://api.deepseek.com/chat/completions"
-MODEL = "deepseek-chat"
+MODEL = "deepseek-flash"
 HEADERS = {
     "Authorization": f"Bearer {key}",
     "Content-Type": "application/json"

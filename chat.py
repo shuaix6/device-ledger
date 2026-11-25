@@ -8,7 +8,7 @@ load_dotenv()
 key = os.getenv("DEEPSEEK_KEY")
 
 URL = "https://api.deepseek.com/chat/completions"
-MODEL = "deepseek-chat"
+MODEL = "deepseek-flash"
 HEADERS = {
     "Authorization": f"Bearer {key}",
     "Content-Type": "application/json"
@@ -88,9 +88,46 @@ def ask_json(question, timeout=30):
         return {"error": "解析失败", "raw": text[:200]}
 
 
+def chat(system_text="你是一个设备维修工程师，回答简短。"):
+    """多轮对话：问一句、答一句，历史累积。输入 quit 退出，返回整段历史。"""
+    messages = [{"role": "system", "content": system_text}]
+
+    print("输入问题开始聊，输入 quit 退出。\n")
+
+    try:
+        while True:
+            q = input(f"你问（已带 {len(messages)} 条历史）：").strip()
+
+            if q == "quit":
+                break
+            if q == "":
+                continue
+
+            reply = call_llm(messages + [{"role": "user", "content": q}])
+            if reply is None:
+                continue
+
+            messages.append({"role": "user", "content": q})
+            messages.append({"role": "assistant", "content": reply})
+
+            with open("run.log", "a", encoding="utf-8") as f:
+                f.write(f"问：{q}\n")
+                f.write(f"答：{reply}\n\n")
+
+            print(f"\n模型: {reply}\n")
+    except KeyboardInterrupt:
+        print()
+
+    print("对话结束，历史共", len(messages), "条。")
+    return messages
+
+
 if __name__ == "__main__":
     print("1 ask")
     print(ask("用一句话解释什么是RAG"))
 
     print("\n2 ask_json")
     print(ask_json("轴承温度过高怎么办"))
+
+    print("\n3 chat")
+    chat()
