@@ -20,9 +20,9 @@ def explain_status(code):
     if code == 200:
         return ""
     if code == 401:
-        return "401: key 不对， 或者根本没带上"
+        return "401: key 不对，或者根本没带上"
     if code == 402:
-        return "402: 账户余额不足， 去充值"
+        return "402: 账户余额不足，去充值"
     if code == 429:
         return "429: 请求太频繁，等几十秒再试"
     return f"没预料到的状态码：{code}"
@@ -39,7 +39,7 @@ def ask_json(question, timeout=30):
     data = {
         "model": MODEL,
         "messages": [
-            {"role": "system", "content":system_text},
+            {"role": "system", "content": system_text},
             {"role": "user", "content": question}
         ],
         "temperature": 0,
@@ -51,7 +51,7 @@ def ask_json(question, timeout=30):
     except requests.exceptions.Timeout:
         return {"error": f"超时：等了 {timeout} 秒"}
     except requests.exceptions.ConnectionError:
-        return {"error":"连不上：检查网络，或者地址写错了"}
+        return {"error": "连不上：检查网络，或者地址写错了"}
 
     trouble = explain_status(r.status_code)
     if trouble:
@@ -74,7 +74,8 @@ ok = 0
 for i in range(10):
     result = ask_json(question)
     if "error" in result:
-        print(i + 1, "✗", result.get("error"), "|", str(result.get("raw", ""))[:60])
+        print(i + 1, "✗", result.get("error"),
+              "|", str(result.get("raw", ""))[:60])
     else:
         ok += 1
         answer = str(result.get("answer", ""))
