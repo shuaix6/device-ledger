@@ -1,3 +1,4 @@
+import json
 import os
 
 import requests
@@ -61,14 +62,35 @@ def call_llm(messages, json_mode=False, timeout=30):
         return None
 
 
-if __name__ == "__main__":
-    msgs = [{"role": "user", "content": "用一句话解释什么是RAG"}]
-    print("1 普通模式")
-    print(call_llm(msgs))
+def ask(question, timeout=30):
+    """问一句，返回回答文字；失败返回 None（原因 call_llm 已打印）。"""
+    return call_llm([{"role": "user", "content": question}], timeout=timeout)
 
-    print("\n2 json 模式")
-    msgs2 = [
-        {"role": "system", "content": '输出 JSON, 格式 {"answer": "一句话回答"}'},
-        {"role": "user", "content": "什么是RAG"},
+
+def ask_json(question, timeout=30):
+    """问一句，要求模型返回 JSON，解析成字典；失败返回 {"error": ...}。"""
+    system_text = (
+        "你必须输出 JSON，格式为 "
+        + '{"answer": "回答内容", "confidence": 0 到 1 的小数}。'
+        + "不要输出任何其他内容，不要加代码块标记。"
+        + "answer 只用一句话说完，不要分点、不要编号、不要列举步骤。"
+    )
+    msgs = [
+        {"role": "system", "content": system_text},
+        {"role": "user", "content": question},
     ]
-    print(call_llm(msgs2, json_mode=True))
+    text = call_llm(msgs, json_mode=True, timeout=timeout)
+    if text is None:
+        return {"error": "请求失败，具体原因看上面的提示"}
+    try:
+        return json.loads(text)
+    except ValueError:
+        return {"error": "解析失败", "raw": text[:200]}
+
+
+if __name__ == "__main__":
+    print("1 ask")
+    print(ask("用一句话解释什么是RAG"))
+
+    print("\n2 ask_json")
+    print(ask_json("轴承温度过高怎么办"))
